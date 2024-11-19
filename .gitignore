@@ -1,0 +1,4 @@
+.idea
+cmake-build-debug
+obj_dir
+wave.vcd
