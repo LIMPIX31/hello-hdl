@@ -10,12 +10,12 @@ if (NOT verilator_FOUND)
 	)
 endif ()
 
-set(CMAKE_CXX_STANDARD 26)
+set(CMAKE_CXX_STANDARD 23)
 
 add_executable(hello_hdl main.cpp)
 target_compile_features(hello_hdl PUBLIC cxx_std_23)
 
 verilate(hello_hdl
 	INCLUDE_DIRS "."
-	SOURCES top.v
+	SOURCES top.v fsm.v
 )

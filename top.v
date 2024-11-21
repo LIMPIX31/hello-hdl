@@ -1,17 +1,18 @@
 module top (
-    input            clk,
-    input            rst,
-    output reg [3:0] led
+    input  wire      clk,
+    input  wire      rst,
+    input  wire      go,
+
+    output reg [3:0] counter,
+    output reg       done_sig
 );
 
-localparam MAX_COUNT = 4'hf;
-
-always @ (posedge clk or posedge rst) begin
-    if (rst == 1 || led == MAX_COUNT) begin
-        led <= 0;
-    end else begin
-        led <= led + 1;
-    end
-end
+fsm f1 (
+	.clk     (clk     ),
+	.rst     (rst     ),
+	.go      (go      ),
+	.counter (counter ),
+	.done_sig(done_sig)
+);
 
 endmodule
