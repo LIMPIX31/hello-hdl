@@ -11,11 +11,13 @@ if (NOT verilator_FOUND)
 endif ()
 
 set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_executable(hello_hdl main.cpp)
+add_executable(hello_hdl src/main.cpp)
 target_compile_features(hello_hdl PUBLIC cxx_std_23)
 
-verilate(hello_hdl
-	INCLUDE_DIRS "."
-	SOURCES top.v fsm.v
+verilate(hello_hdl COVERAGE TRACE
+	INCLUDE_DIRS "src"
+	VERILATOR_ARGS -f ./input.vc -x-assign fast
+	SOURCES src/top.sv
 )

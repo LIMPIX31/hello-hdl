@@ -43,7 +43,7 @@ public:
 	}
 };
 
-void run(const Vtop &top, Ticker &ticker) {
+void run(Vtop &top, Ticker &ticker) {
 	auto clock = [&] (const u64 times) {
 		for (u64 i = 0; i < times; i++) {
 			ticker.tick_posedge(top.clk);
@@ -78,7 +78,7 @@ int main(const i32 argc, char **argv) {
 	Verilated::traceEverOn(true);
 	const auto tracer = std::make_unique<VerilatedVcdC>();
 	top->trace(tracer.get(), 99);
-	tracer->open("wave.vcd");
+	tracer->open("result.vcd");
 
 	auto ticker = Ticker(*top, *tracer);
 

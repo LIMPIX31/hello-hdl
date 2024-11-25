@@ -1,7 +1,14 @@
+clean:
+	rm -rf ./build
+
 build:
-	verilator -Wall --cc -CFLAGS "-g" --trace top.v --exe main.cpp
-	make -j -C obj_dir -f Vtop.mk Vtop
+	mkdir -p build && cd build && cmake ..
+	cmake --build build -j
+
 run: build
-	./obj_dir/Vtop -t
-run-wave: run
-	gtkwave wave.vcd
+	build/hello_hdl +trace
+
+wave:
+	gtkwave result.vcd
+
+run-wave: run && wave
